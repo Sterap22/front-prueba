@@ -1,5 +1,9 @@
-.stick{
-  position: fixed;
-  z-index: 999;
-  width: 100%;
+.carousel-item {
+  height: auto;
+  max-height: 400px;
+}
+.Error404{
+  font-size: 29vW;
+  text-align: center;
+  color: #666565;
 }

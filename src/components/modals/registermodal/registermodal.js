@@ -1,11 +1,11 @@
 import axios from 'axios';
-import React, { useState } from 'react'
 import * as CryptoJS from "crypto-js";
-import { Form, FormControl, InputGroup, Modal, Button } from 'react-bootstrap';
+import React, {  useState } from 'react'
+import { Button, Form, FormControl, InputGroup, Modal } from 'react-bootstrap';
 import { urlAPI } from '../../../utils/config';
 import { validateEmail } from '../../../utils/validations';
 
-export default function LoginModal() {
+export default function Registermodal() {
     const [show, setShow] = useState();
     const [showMess, setShowMess] = useState(false);
     const handleClose = () => {
@@ -15,7 +15,7 @@ export default function LoginModal() {
     }
     const handleShow = () => {
         setShow(true)
-        window.history.pushState(null,'','/IniciarSesion')
+        window.history.pushState(null,'','/registrar')
     }
     const [dataLogin, sedataLogin] = useState(formLogin)
 
@@ -30,9 +30,10 @@ export default function LoginModal() {
         e.preventDefault();
         dataLogin.correo = document.getElementById('correo').value
         dataLogin.clave = document.getElementById('clave').value
+        console.log(validateEmail(dataLogin.correo),'validacion');
         if(validateEmail(dataLogin.correo)  && dataLogin.clave !== ''){
 
-            axios.post(`${urlAPI}/user/login`,JSON.stringify(dataLogin),{
+            axios.post(`${urlAPI}/user/register`,JSON.stringify(dataLogin),{
                 headers: {
                     "Content-type": "application/json"
                 }
@@ -53,14 +54,14 @@ export default function LoginModal() {
   return (
       <>
           <span class="nav-link" onClick={handleShow} style={{cursor: 'pointer'}}>
-              Iniciar sesion
+              Quiero unirme
           </span>
           <Modal show={show} onHide={handleClose}>
               <Modal.Body>
                   <Form onSubmit={(e)=>{iniciarSesion(e)}}>
                   <InputGroup className="mb-3 m-auto">
                       <h4>
-                      Inicio de sesion
+                        Registrar usuario
                           </h4>
                           </InputGroup>
                       <InputGroup className="mb-3">
@@ -83,8 +84,8 @@ export default function LoginModal() {
                           />
                       </InputGroup>
                       <InputGroup className="mb-3">
-                          <span style={{display:showMess?'block':'none', color:'red'}} >Erro tus datos no estan completos o son incorrectos</span>
-                          <Button type='submit' variant="success" className='m-auto'> Iniciar sesion </Button>
+                            <span style={{display:showMess?'block':'none', color:'red'}} >Erro tus datos no estan completos o son incorrectos</span>
+                          <Button type='submit' variant="success" className='m-auto'> Registrar </Button>
                       </InputGroup>
                   </Form>
               </Modal.Body>
@@ -92,3 +93,4 @@ export default function LoginModal() {
       </>
   )
 }
+

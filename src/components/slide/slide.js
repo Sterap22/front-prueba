@@ -1,26 +1,6 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { urlAPI } from '../../utils/config'
-import Loader from '../loader/Loader';
+import React, { useState } from 'react'
 
 export default function Slide() {
-    const [loaderShow, setLoaderShow] = useState(false);
-    useEffect(()=>{
-        setLoaderShow(true)
-        axios.get(`${urlAPI}/producto/traer`, {
-            headers: {
-                "Content-type": "application/json"
-            }
-        }).then(succ=>{
-            if(succ.data.status === 202){
-                succ.data.data.map((x,index)=> dataSlide.push(x))
-                // setdataSlide(dataSlide)
-            }
-            setLoaderShow(false)
-        }).catch(err=>{
-            console.log(err);
-        })
-    },[])
     const [dataSlide, setdataSlide] = useState([
         {
             imagenes:'https://cdn.pixabay.com/photo/2022/03/12/07/47/lotus-7063576_960_720.jpg',
@@ -38,18 +18,8 @@ export default function Slide() {
             descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lorem elit, imperdiet consectetur enim ac, commodo varius lacus.'
         }
     ])
-    
-    let elemento = [];
-    const getImg = () => {
-        
-    }
     return (
         <React.Fragment>
-             {/* {
-                loaderShow && (
-                    <Loader show={true} />
-                )
-            } */}
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
                 <div class="carousel-inner">
                     {
